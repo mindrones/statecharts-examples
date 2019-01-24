@@ -2,6 +2,8 @@
 
 <https://skorks.com/2011/09/why-developers-never-use-state-machines/>
 
+[Svelte Implementation: REPL Link](https://v3.svelte.technology/repl?version=3.0.0-alpha19&gist=833970d3b40fbf997cb7ad0adfcd3b9b)
+
 # Behaviour
 
 1. When the page is scrolled to the top, we see no table of contents (TOC)
