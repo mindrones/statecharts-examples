@@ -1,0 +1,48 @@
+<svelte:window bind:scrollY={y} on:scroll="{handleScroll}"/>
+
+{#if $tocMachine !== 'hidden'}
+
+<div class="toc-container" 
+		 on:mouseover="{() =>tocMachine.send('MOUSEOVER')}"
+		 on:mouseout="{() =>tocMachine.send('MOUSEOUT')}"
+>
+	<p>Table of Contents</p>
+	
+	{#if $tocMachine === 'expanded'}
+		<div>
+			<slot></slot>
+		</div>
+	{/if}
+	
+</div>
+{/if}
+
+<p>Current State: <strong>{$tocMachine}</strong></p>
+
+
+<script>
+	import { tocMachine } from './store.js';
+	export let scrollLimit;
+	let y;
+	
+	function handleScroll() {
+		if (y > scrollLimit) tocMachine.send('SCROLLED_DOWN');
+		if (y < scrollLimit) tocMachine.send('SCROLLED_UP');
+	}
+</script>
+
+<style>
+	.toc-container {
+		position: fixed;
+		top: 0;
+		right: 0;
+		padding: 0px 20px;
+		background: #fff;
+		box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
+		transition: 0.2s;
+	}
+	
+</style>
+
+
+
